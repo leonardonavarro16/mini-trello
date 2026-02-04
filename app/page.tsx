@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
-import { Download, Upload, Zap } from "lucide-react";
+import { Download, Moon, Sun, Upload, Zap } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -28,6 +29,8 @@ import {
 import { TaskFormValues } from "@/lib/validations";
 
 export default function Home() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [board, setBoard] = useState<BoardState>(INITIAL_BOARD_STATE);
   const [loaded, setLoaded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,6 +42,9 @@ export default function Home() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [deletingTask, setDeletingTask] = useState<Task | null>(null);
   const [importDialogOpen, setImportDialogOpen] = useState(false);
+
+  // Marcar como montado (para evitar hydration mismatch con el tema)
+  useEffect(() => setMounted(true), []);
 
   // Cargar estado desde localStorage al montar
   useEffect(() => {
@@ -260,15 +266,30 @@ export default function Home() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <h1 className="text-xl font-bold tracking-tight">
-                Micro Trello
+              <h1 className="text-5xl font-bold tracking-tight">
+                Taskify
               </h1>
-              <p className="text-xs text-muted-foreground">
-                Gestor Kanban - Tareas de Broker
+              <p className="text-xl text-muted-foreground">
+                Gestor de tareas 
               </p>
             </div>
 
             <div className="flex items-center gap-3">
+              {/* Switch Modo Oscuro / Claro */}
+              <div className="flex items-center gap-2">
+                <Sun className="h-3.5 w-3.5 text-muted-foreground" />
+                <Switch
+                  id="theme-toggle"
+                  checked={mounted && resolvedTheme === "dark"}
+                  onCheckedChange={(checked) =>
+                    setTheme(checked ? "dark" : "light")
+                  }
+                  aria-label="Alternar modo oscuro"
+                  size="sm"
+                />
+                <Moon className="h-3.5 w-3.5 text-muted-foreground" />
+              </div>
+
               {/* Switch Modo Dios */}
               <div className="flex items-center gap-2">
                 <Switch

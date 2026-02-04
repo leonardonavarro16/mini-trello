@@ -23,7 +23,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
         <Input
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Buscar tareas... (ej: tag:mercado p:high)"
+          placeholder="Buscar tareas..."
           className="pl-10"
           aria-label="Buscar tareas con operadores avanzados"
         />

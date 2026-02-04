@@ -114,7 +114,7 @@ export function AuditLog({ eventos }: AuditLogProps) {
                 <TableHead className="w-[180px]">Fecha</TableHead>
                 <TableHead className="w-[100px]">Acción</TableHead>
                 <TableHead className="w-[200px]">Tarea</TableHead>
-                <TableHead>Cambios (Diff)</TableHead>
+                <TableHead>Cambios </TableHead>
                 <TableHead className="w-[100px]">Usuario</TableHead>
               </TableRow>
             </TableHeader>

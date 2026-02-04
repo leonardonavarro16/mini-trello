@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Micro Trello - Gestor Kanban de Tareas de Broker",
+  title: "Taskify",
   description:
     "Mini gestor de tareas tipo Kanban con auditoría, búsqueda avanzada y modo de evaluación.",
 };

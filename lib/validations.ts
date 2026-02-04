@@ -21,6 +21,7 @@ export const taskFormSchema = z.object({
     .min(1, "La estimación debe ser al menos 1 minuto")
     .max(9999, "La estimación no puede superar 9999 minutos"),
   fechaLimite: z.string(),
+  horaLimite: z.string(),
 });
 
 export type TaskFormValues = z.infer<typeof taskFormSchema>;

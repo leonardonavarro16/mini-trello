@@ -129,6 +129,9 @@ export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
             >
               <Calendar className="h-3 w-3" />
               {new Date(task.fechaLimite).toLocaleDateString("es-ES")}
+              {new Date(task.fechaLimite).getHours() !== 0 || new Date(task.fechaLimite).getMinutes() !== 0
+                ? ` ${new Date(task.fechaLimite).toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })}`
+                : ""}
               {estaVencida && " (vencida)"}
             </span>
           )}

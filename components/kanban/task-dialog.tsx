@@ -59,6 +59,7 @@ export function TaskDialog({
       tags: "",
       estimacionMin: 30,
       fechaLimite: "",
+      horaLimite: "",
     },
   });
 
@@ -75,6 +76,9 @@ export function TaskDialog({
           fechaLimite: task.fechaLimite
             ? task.fechaLimite.slice(0, 10)
             : "",
+          horaLimite: task.fechaLimite
+            ? task.fechaLimite.slice(11, 16)
+            : "",
         });
       } else {
         form.reset({
@@ -84,6 +88,7 @@ export function TaskDialog({
           tags: "",
           estimacionMin: 30,
           fechaLimite: "",
+          horaLimite: "",
         });
       }
       // Foco en el campo título al abrir (accesibilidad)
@@ -229,24 +234,43 @@ export function TaskDialog({
               )}
             />
 
-            {/* Fecha Límite */}
-            <FormField
-              control={form.control}
-              name="fechaLimite"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Fecha Límite</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="date"
-                      {...field}
-                      aria-label="Fecha límite de la tarea"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {/* Fecha y Hora Límite */}
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="fechaLimite"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Fecha Límite</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="date"
+                        {...field}
+                        aria-label="Fecha límite de la tarea"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="horaLimite"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Hora Límite</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="time"
+                        {...field}
+                        aria-label="Hora límite de la tarea"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <DialogFooter>
               <Button
@@ -256,7 +280,10 @@ export function TaskDialog({
               >
                 Cancelar
               </Button>
-              <Button type="submit">
+              <Button
+                type="submit"
+                className="bg-primary text-primary-foreground font-semibold px-6 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all"
+              >
                 {isEditing ? "Guardar cambios" : "Crear tarea"}
               </Button>
             </DialogFooter>

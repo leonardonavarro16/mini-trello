@@ -87,6 +87,14 @@ export default function Home() {
 
     if (editingTask) {
       // EDITAR tarea existente
+      let fechaLimiteISO = "";
+      if (data.fechaLimite) {
+        const fechaStr = data.horaLimite
+          ? `${data.fechaLimite}T${data.horaLimite}`
+          : data.fechaLimite;
+        fechaLimiteISO = new Date(fechaStr).toISOString();
+      }
+
       const updatedTask: Task = {
         ...editingTask,
         titulo: data.titulo,
@@ -94,9 +102,7 @@ export default function Home() {
         prioridad: data.prioridad,
         tags,
         estimacionMin: data.estimacionMin,
-        fechaLimite: data.fechaLimite
-          ? new Date(data.fechaLimite).toISOString()
-          : "",
+        fechaLimite: fechaLimiteISO,
       };
 
       const evento = auditEditar(editingTask, updatedTask);
@@ -113,6 +119,14 @@ export default function Home() {
       toast.success("Tarea actualizada");
     } else {
       // CREAR nueva tarea
+      let fechaLimiteISO = "";
+      if (data.fechaLimite) {
+        const fechaStr = data.horaLimite
+          ? `${data.fechaLimite}T${data.horaLimite}`
+          : data.fechaLimite;
+        fechaLimiteISO = new Date(fechaStr).toISOString();
+      }
+
       const newTask: Task = {
         id: uuidv4(),
         titulo: data.titulo,
@@ -121,9 +135,7 @@ export default function Home() {
         tags,
         estimacionMin: data.estimacionMin,
         fechaCreacion: new Date().toISOString(),
-        fechaLimite: data.fechaLimite
-          ? new Date(data.fechaLimite).toISOString()
-          : "",
+        fechaLimite: fechaLimiteISO,
         estado,
       };
 

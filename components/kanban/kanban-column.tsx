@@ -50,12 +50,13 @@ export function KanbanColumn({
         </div>
         <Button
           variant="ghost"
-          size="icon"
-          className="h-7 w-7 text-white hover:bg-white/20 hover:text-white"
+          size="sm"
+          className="h-7 px-2 bg-white/25 text-white font-semibold hover:bg-white/40 hover:text-white rounded-md gap-1"
           onClick={() => onAddTask(id)}
           aria-label={`Añadir tarea a ${titulo}`}
         >
           <Plus className="h-4 w-4" />
+          <span className="text-xs">Nueva</span>
         </Button>
       </div>
 
